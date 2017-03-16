@@ -17,7 +17,7 @@ import (
 
 var IllegalArgumentError = New("illegal argument")
 
-var logger *log.Logger = log.New(os.Stderr, "[error] ", 0)
+var Logger = log.New(os.Stderr, "[error] ", 0)
 
 type Error struct {
 	Err    error
@@ -127,7 +127,7 @@ func Fatalf(format string, a ...interface{}) {
 func print(err error) {
 	switch e := err.(type) {
 	case *Error:
-		logger.Print(e.ErrorStack())
+		Logger.Print(e.ErrorStack())
 	default:
 		panic("should never happen")
 	}
@@ -136,7 +136,7 @@ func print(err error) {
 func fatal(err error) {
 	switch e := err.(type) {
 	case *Error:
-		logger.Fatal(e.ErrorStack())
+		Logger.Fatal(e.ErrorStack())
 	default:
 		panic("should never happen")
 	}
